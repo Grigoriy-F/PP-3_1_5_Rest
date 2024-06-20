@@ -60,13 +60,20 @@ public User findByEmail(String email) throws EntityNotFoundException {
             entityManager.remove(userToDelete);
         }
     }
+//    @Override
+//    public boolean exist(String email) {
+//        Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = : e");
+//        query.setParameter("e", email);
+//        if (((org.hibernate.query.Query)query).list().isEmpty()) {
+//            return false;
+//        }
+//        return true;
+//    }
+
     @Override
     public boolean exist(String email) {
         Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = : e");
         query.setParameter("e", email);
-        if (((org.hibernate.query.Query)query).list().isEmpty()) {
-            return false;
-        }
-        return true;
+        return !query.getResultList().isEmpty();
     }
 }

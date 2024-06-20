@@ -37,7 +37,6 @@ public Role findByRole(String role) throws EntityNotFoundException {
     public void save(Role role) {
         entityManager.persist(role);
     }
-
     @Override
     public boolean exist(String role) {
         Query query = entityManager.createQuery("SELECT r FROM Role r WHERE r.role = : role");
