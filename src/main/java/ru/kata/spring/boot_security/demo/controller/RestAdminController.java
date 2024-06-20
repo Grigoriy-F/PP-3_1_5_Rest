@@ -11,41 +11,46 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+//@RequestMapping("/users")
+@RequestMapping("/api/admin") // Изменил базовый путь
 public class RestAdminController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public RestAdminController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping()
+    //    @GetMapping()
+    @GetMapping("/users")
     public ResponseEntity<List<User>> allUsersRest() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/user")
     public ResponseEntity<User> navBar(Principal principal) {
-        return new ResponseEntity<>(userService.findByEmail(principal.getName()),HttpStatus.OK);
+        return new ResponseEntity<>(userService.findByEmail(principal.getName()), HttpStatus.OK);
     }
 
-    @PostMapping()
-    public ResponseEntity<User> addUser (@RequestBody User user) {
+    //    @PostMapping()
+    @PostMapping("/users")
+    public ResponseEntity<User> addUser(@RequestBody User user) {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    @PutMapping()
-    public ResponseEntity<User> update (@RequestBody User user) {
+//    @PutMapping()
+    @PutMapping("/users")
+    public ResponseEntity<User> update(@RequestBody User user) {
         userService.update(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Integer> delete (@PathVariable("id") int id) {
+//    @DeleteMapping("/{id}")
+@DeleteMapping("/users/{id}")
+    public ResponseEntity<Integer> delete(@PathVariable("id") int id) {
         userService.delete(id);
-        return new ResponseEntity<>(id,HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
     }
 }

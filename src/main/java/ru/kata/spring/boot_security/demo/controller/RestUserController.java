@@ -12,10 +12,11 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/info")
+//@RequestMapping("/info")
+@RequestMapping("/api/user") // Изменил базовый путь
 public class RestUserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
     public RestUserController(UserService userService) {
