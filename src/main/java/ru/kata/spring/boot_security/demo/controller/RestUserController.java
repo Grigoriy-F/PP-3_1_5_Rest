@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import java.security.Principal;
 
 @RestController
+//@RequestMapping("/info")
 @RequestMapping("/api/user") // Изменил базовый путь
 public class RestUserController {
 
