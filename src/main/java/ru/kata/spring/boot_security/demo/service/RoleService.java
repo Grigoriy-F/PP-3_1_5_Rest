@@ -7,5 +7,4 @@ import java.util.List;
 public interface RoleService {
     Role findByRole (String role);
     void save (Role role);
-    boolean exist(String role);
 }

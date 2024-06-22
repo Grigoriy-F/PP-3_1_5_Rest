@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.dao.RoleDao;
-import ru.kata.spring.boot_security.demo.dao.RoleDaoImpl;
 import ru.kata.spring.boot_security.demo.model.Role;
-
-import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService{
@@ -21,7 +18,7 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public Role findByRole(String role) {
-        return roleDao.findByRole(role);
+        return roleDao.findByRole(role).orElse(null);
     }
 
     @Transactional
@@ -30,9 +27,5 @@ public class RoleServiceImpl implements RoleService{
         roleDao.save(role);
     }
 
-    @Override
-    public boolean exist(String role) {
-        return roleDao.exist(role);
-    }
 }
 

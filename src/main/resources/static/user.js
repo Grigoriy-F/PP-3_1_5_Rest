@@ -1,4 +1,4 @@
-const url ='http://localhost:8080/info'
+const url ='http://localhost:8080/api/user'
 
 
 fetch(url)
