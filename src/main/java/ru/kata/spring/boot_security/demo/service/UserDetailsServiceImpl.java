@@ -9,9 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.model.Role;
-import ru.kata.spring.boot_security.demo.model.User;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -25,21 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userDao = userDao;
     }
 
-    //    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        User user;
-//        try {
-//            user = userDao.findByEmail(username);
-//        } catch (EntityNotFoundException e) {
-//            throw new UsernameNotFoundException("Email " + username + " not found!");
-//        }
-//        return user;
-//    }
-
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Используем Optional для поиска пользователя по email
         return userDao.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Email " + username + " not found!"));
     }

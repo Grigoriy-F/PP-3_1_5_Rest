@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -54,7 +53,6 @@ public class Role implements GrantedAuthority {
     public List<User> getUsers() {
         return users;
     }
-
     public void setUsers(List<User> users) {
         this.users = users;
     }

@@ -8,7 +8,6 @@ import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +26,11 @@ public class DbInit {
     private void postConstruct() {
         Role adminRole = new Role("ROLE_ADMIN");
         Role userRole = new Role("ROLE_USER");
-        if(roleService.findByRole("ROLE_ADMIN") == null) {
+        if (roleService.findByRole("ROLE_ADMIN") == null) {
             roleService.save(adminRole);
         }
 
-        if(roleService.findByRole("ROLE_USER") == null) {
+        if (roleService.findByRole("ROLE_USER") == null) {
             roleService.save(userRole);
         }
 
@@ -40,7 +39,7 @@ public class DbInit {
             adminRolesList.add(adminRole);
             adminRolesList.add(userRole);
             User admin = new User("admin", "admin", 28, "admin@mail.com",
-                    "admin",adminRolesList);
+                    "admin", adminRolesList);
             userService.save(admin);
         }
 
