@@ -11,7 +11,6 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/users")
 @RequestMapping("/api/admin") // Изменил базовый путь
 public class RestAdminController {
 
@@ -22,7 +21,7 @@ public class RestAdminController {
         this.userService = userService;
     }
 
-    //    @GetMapping()
+
     @GetMapping("/users")
     public ResponseEntity<List<User>> allUsersRest() {
         return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
@@ -33,21 +32,21 @@ public class RestAdminController {
         return new ResponseEntity<>(userService.findByEmail(principal.getName()), HttpStatus.OK);
     }
 
-    //    @PostMapping()
+
     @PostMapping("/users")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-//    @PutMapping()
+
     @PutMapping("/users")
     public ResponseEntity<User> update(@RequestBody User user) {
         userService.update(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-//    @DeleteMapping("/{id}")
+
 @DeleteMapping("/users/{id}")
     public ResponseEntity<Integer> delete(@PathVariable("id") int id) {
         userService.delete(id);
