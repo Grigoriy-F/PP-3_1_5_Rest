@@ -42,23 +42,16 @@ public class User implements UserDetails {
     private String password;
 
 //    @Column(name = "roles")
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
 //    @LazyCollection(LazyCollectionOption.EXTRA)
 //    @Fetch(FetchMode.JOIN)
     @JoinTable(
             name = "User_Role",
             joinColumns = @JoinColumn(name = "user_id"),
+
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
 
-//    @Column(name = "roles")
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-//    @JoinTable(
-//            name = "User_Role",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id")
-//    )
     private List<Role> roles;
 
     public User() {

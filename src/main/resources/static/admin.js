@@ -1,5 +1,5 @@
-const url1 ='http://localhost:8080/users/user'
-const url2 ='http://localhost:8080/users'
+const url1 ='http://localhost:8080/api/user'
+const url2 ='http://localhost:8080/api/admin/users'
 const url3 ='http://localhost:8080/users/'
 
 //Nav Bar

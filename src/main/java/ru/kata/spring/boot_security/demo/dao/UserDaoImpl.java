@@ -12,6 +12,8 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+
 //    @Override
 //    public User findByEmail(String email) {
 //        Query query = entityManager.createQuery("SELECT u FROM User u WHERE u.email = : e");
@@ -32,10 +34,18 @@ public User findByEmail(String email) throws EntityNotFoundException {
     return result;
 }
 
+//    @Override
+//    public List<User> getUsers() {
+//        return entityManager.createQuery("SELECT u FROM User u").getResultList();
+//    }
+
     @Override
     public List<User> getUsers() {
-        return entityManager.createQuery("SELECT u FROM User u").getResultList();
+    List<User> users = entityManager.createQuery("SELECT distinct u FROM User u JOIN FETCH u.roles").getResultList();
+        System.out.println(users);
+        return users;
     }
+
 
     @Override
     public void save(User user) {
