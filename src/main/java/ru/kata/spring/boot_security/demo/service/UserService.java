@@ -7,11 +7,11 @@ import java.util.List;
 public interface UserService {
     List<User> getUsers();
 
-    void save(User user);
+    void save(User user) throws EmailAlreadyExistsException;
 
     User findByEmail(String email);
 
-    void update(User user);
+    void update(User user) throws EmailAlreadyExistsException;
 
     void delete(int id);
 

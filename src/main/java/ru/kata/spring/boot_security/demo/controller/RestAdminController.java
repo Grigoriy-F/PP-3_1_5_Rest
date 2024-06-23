@@ -5,8 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.EmailAlreadyExistsException;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import javax.validation.constraints.Email;
 import java.security.Principal;
 import java.util.List;
 
@@ -32,17 +34,25 @@ public class RestAdminController {
 
     @PostMapping("/users")
     public ResponseEntity<User> addUser(@RequestBody User user) {
-        userService.save(user);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        try {
+            userService.save(user);
+            return new ResponseEntity<>(user, HttpStatus.CREATED);
+        } catch (EmailAlreadyExistsException e) {
+            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/users")
     public ResponseEntity<User> update(@RequestBody User user) {
-        userService.update(user);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        try {
+            userService.update(user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (EmailAlreadyExistsException e) {
+            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
-@DeleteMapping("/users/{id}")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<Integer> delete(@PathVariable("id") int id) {
         userService.delete(id);
         return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);

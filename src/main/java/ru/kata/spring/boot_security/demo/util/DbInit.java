@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
+import ru.kata.spring.boot_security.demo.service.EmailAlreadyExistsException;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -40,7 +41,10 @@ public class DbInit {
             adminRolesList.add(userRole);
             User admin = new User("admin", "admin", 28, "admin@mail.com",
                     "admin", adminRolesList);
-            userService.save(admin);
+            try {
+                userService.save(admin);
+            } catch (EmailAlreadyExistsException ignored) {
+            }
         }
 
         if (userService.findByEmail("user@mail.com") == null) {
@@ -48,7 +52,10 @@ public class DbInit {
             userRolesList.add(userRole);
             User user = new User("user", "user", 28, "user@mail.com",
                     "user", userRolesList);
-            userService.save(user);
+            try {
+                userService.save(user);
+            } catch (EmailAlreadyExistsException ignored) {
+            }
         }
     }
 }
