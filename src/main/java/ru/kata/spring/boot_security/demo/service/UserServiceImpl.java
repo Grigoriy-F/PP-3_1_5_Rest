@@ -26,13 +26,6 @@ public class UserServiceImpl implements UserService {
         return userDao.getUsers();
     }
 
-//    @Transactional
-//    @Override
-//    public void save(User user) {
-//        String pass = user.getPassword();
-//        user.setPassword(passwordEncoder.encode(pass));
-//        userDao.save(user);
-//    }
 @Transactional
 @Override
 public void save(User user) throws EmailAlreadyExistsException {
@@ -49,13 +42,6 @@ public void save(User user) throws EmailAlreadyExistsException {
         return userDao.findByEmail(email).orElse(null);
     }
 
-//    @Transactional
-//    @Override
-//    public void update(User user) {
-//        String pass = user.getPassword();
-//        user.setPassword(passwordEncoder.encode(pass));
-//        userDao.save(user);
-//    }
 @Transactional
 @Override
 public void update(User user) throws EmailAlreadyExistsException {

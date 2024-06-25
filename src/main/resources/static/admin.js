@@ -1,6 +1,6 @@
 const url1 ='http://localhost:8080/api/user'
 const url2 ='http://localhost:8080/api/admin/users'
-const url3 ='http://localhost:8080/users/'
+const url3 ='http://localhost:8080/api/admin/users/'
 
 //Nav Bar
 fetch(url1)
@@ -91,7 +91,12 @@ newUserForm.addEventListener('submit', (e) => {
         },
         body: JSON.stringify(newUser)
     })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            alert('This email already exists')
+        })
         .then((data) => {
             const newUserInTable = []
             newUserInTable.push(data)
@@ -146,7 +151,12 @@ editModal.addEventListener('submit', (e) => {
         },
         body: JSON.stringify(editUser)
     })
-        .then(response => response.json())
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            alert('This email already exists')
+        })
         .then((data) => {
             const editUserInTable = []
             editUserInTable.push(data)
